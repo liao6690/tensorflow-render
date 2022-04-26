@@ -28,6 +28,7 @@ img_size = 224
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
 app.mount('/static', StaticFiles(directory='app/static'))
+data={0:'檸檬', 1:'葡萄柚', 2:'金桔', 3:'柑', 4:'柳丁'}
 
 
 async def download_file(url, dest):
@@ -90,11 +91,7 @@ async def analyze(request):
     img = preprocess_input( np.array([img]) )
     predictions = learn.predict(img)  
     prediction = predictions.argmax()
-    def guess(ans):
-        data={0:'檸檬', 1:'葡萄柚', 2:'金桔', 3:'柑', 4:'柳丁'}
-        #return JSONResponse({'result': data[prediction]})
-        return JSONResponse(data)
-    guess(prediction)
+    return JSONResponse({'result': data[prediction]})
 
 
 if __name__ == '__main__':
