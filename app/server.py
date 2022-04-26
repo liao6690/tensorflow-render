@@ -91,7 +91,7 @@ async def analyze(request):
     predictions = learn.predict(img)  
     prediction = predictions.argmax()
     list1=['檸檬', '葡萄柚', '金桔', '柑', '柳丁']
-    return JSONResponse({'result': list1(prediction)})
+    return JSONResponse({'result': list1[prediction]})
 
 
 if __name__ == '__main__':
